@@ -1005,11 +1005,11 @@
     function renderCashFlow(p, survival, netRev) {
         const sim = simulateCashFlow(p.cpc, p.spend, survival, netRev, p.roas, Math.min(52, MAX_WEEKS));
         const table = document.getElementById('cashflowTable');
-        let html = `<thead><tr><th>Tuần</th><th>DT Quảng cáo</th><th>DT IAP</th><th>Tổng tuần</th><th>Chi tiêu lũy kế</th><th>Doanh thu lũy kế</th><th>Lợi nhuận</th></tr></thead><tbody>`;
+        let html = `<thead><tr><th>Tuần</th><th>CT Hàng tuần</th><th>DT Quảng cáo</th><th>DT IAP</th><th>Tổng tuần</th><th>Chi tiêu lũy kế</th><th>Doanh thu lũy kế</th><th>Lợi nhuận</th></tr></thead><tbody>`;
         for (const r of sim.rows) {
             const cls = sim.beWeek === r.w ? ' class="be-row"' : '';
             const pCls = r.profit >= 0 ? 'positive' : 'negative';
-            html += `<tr${cls}><td>W${r.w}</td><td>${fmt(r.wkAdRev)}</td><td>${fmt(r.wkIAP)}</td><td>${fmt(r.wkTotal)}</td><td>${fmt(r.cumSpend)}</td><td>${fmt(r.cumRev)}</td><td class="${pCls}">${fmt(r.profit)}</td></tr>`;
+            html += `<tr${cls}><td>W${r.w}</td><td>${fmt(r.spend)}</td><td>${fmt(r.wkAdRev)}</td><td>${fmt(r.wkIAP)}</td><td>${fmt(r.wkTotal)}</td><td>${fmt(r.cumSpend)}</td><td>${fmt(r.cumRev)}</td><td class="${pCls}">${fmt(r.profit)}</td></tr>`;
         }
         html += '</tbody>';
         table.innerHTML = html;
